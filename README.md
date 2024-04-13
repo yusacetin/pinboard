@@ -1,6 +1,19 @@
 ## Pinboard
 
-A Qt6 program to copy paste from a preconfigured set of texts. Designed to be assigned to a keyboard shortcut such as CTRL + ALT + V. Customize the pins by editing the pins.json file (should be in the same directory as the executable). Building not tested on Windows.
+A Qt6 program to copy paste from a preconfigured set of texts. Designed to be assigned to a keyboard shortcut such as CTRL + ALT + V. Customize the pins by editing the pins.json file (should be in the same directory as the executable) (building overwrites the file inside the build directory with the file in the root directory). Building not tested on Windows.
+
+### Usage
+
+| Keys           | Function                                       |
+|----------------|------------------------------------------------|
+| H, J, K, L     | Navigate                                       |
+| Arrow Keys     | Navigate                                       |
+| Enter or Space | Copy the highlighted item and quit the program |
+| Esc or Q       | Quit the program                               |
+
+### Screenshot
+
+![screenshot](./screenshot.png)
 
 ### License
 
