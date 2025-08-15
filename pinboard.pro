@@ -1,8 +1,9 @@
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17 release
+win32:LIBS += -luxtheme -ldwmapi
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -21,16 +22,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-
-copy_pins.target = copy_pins
-unix {
-    copy_pins.commands = cp pins.json build
-}
-win32 {
-    copy_pins.commands = copy pins.json build
-}
-QMAKE_EXTRA_TARGETS += copy_pins
-POST_TARGETDEPS += copy_pins
 
 release:DESTDIR = build
 release:OBJECTS_DIR = build/objects

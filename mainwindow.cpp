@@ -13,7 +13,17 @@
 #include <QScreen>
 #include <QRect>
 
+#ifdef Q_OS_WIN
+    #include <windows.h>
+    #include <dwmapi.h>
+#endif
+
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
+    #ifdef Q_OS_WIN
+        BOOL value = TRUE;
+        DwmSetWindowAttribute(reinterpret_cast<HWND>(winId()), 20, &value, sizeof(value));
+    #endif
+
     setStyleSheet(PinboardStyle::pinboard_style);
     clipboard = QApplication::clipboard();
     QWidget* central = new QWidget(this);
@@ -29,7 +39,7 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::generate_buttons() {
-    QFile pins_file("/home/yusha/Projects/pinboard/pins.json");
+    QFile pins_file("pins.json");
     bool pins_file_open = pins_file.open(QIODevice::ReadOnly);
     if (!pins_file_open) {
         qWarning() << "Failed to open JSON file pins.json";

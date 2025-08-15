@@ -7,27 +7,35 @@ namespace PinboardStyle {
     QString pinboard_style = R"(
 
 QWidget {
-    background-color: rgb(32, 32, 32);
+    background-color: rgb(24, 24, 24);
+    color: rgb(250, 250, 250);
 }
 
 QPushButton {
-    background: qlineargradient(x1:0.5, y1:0, x2:0.5, y2:1, stop:0 #303030, stop:1 #2C2C2C);
-    border-radius: 5px;
-    border: 3px solid rgb(8, 8, 8);
-    padding-top: 4px;
-    padding-bottom: 4px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin: 4px;
+    background-color: rgb(42, 42, 42);
+    color: rgb(250, 250, 250);
+    font-size: 18pt;
+
+    border-radius: 0.2em;
+    border: 0.12em solid rgb(60, 60, 60);
+
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    padding-right: 1em;
+    padding-left: 1em;
+
+    margin: 0.25em;
 }
 
 QPushButton:hover {
-    border: 3px solid rgb(5, 50, 110);
-
+    background-color: rgb(50, 50, 50);
+    border: 0.12em solid rgb(7, 65, 135);
 }
 
 QPushButton:focus {
-    border: 3px solid rgb(6, 60, 160);
+    background-color: rgb(55, 55, 55);
+    border: 0.12em solid rgb(10, 90, 180);
 }
 
 )";
