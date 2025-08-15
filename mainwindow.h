@@ -22,6 +22,8 @@ public slots:
 private:
     void generate_buttons();
     void show_error_dialog(QString message);
+    bool is_linux_qt_based();
+    void copy_linux_non_qt(QString qtext);
     std::vector<int> cols;
     int rows = 0;
     QGridLayout* table;

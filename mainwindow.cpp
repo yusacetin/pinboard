@@ -99,10 +99,53 @@ void MainWindow::generate_buttons() {
     rows = row;
 }
 
+bool MainWindow::is_linux_qt_based() {
+    auto get_env = [](const char* var) -> std::string {
+        const char* val = std::getenv(var);
+        return val ? std::string(val) : "";
+    };
+
+    std::string de = get_env("XDG_CURRENT_DESKTOP");
+    if (de.empty()) {
+        de = get_env("DESKTOP_SESSION");
+    }
+    if (de.empty()) {
+        de = get_env("GDMSESSION");
+    }
+
+    std::transform(de.begin(), de.end(), de.begin(), ::tolower);
+
+    return (
+        de.find("kde") != std::string::npos ||
+        de.find("plasma") != std::string::npos ||
+        de.find("lxqt") != std::string::npos
+    );
+}
+
+void MainWindow::copy_linux_non_qt(QString qtext) {
+    // Try wl-copy first for Wayland, then xclip for X11
+    std::string text = qtext.toStdString();
+    FILE* pipe = popen("wl-copy 2>/dev/null || xclip -selection clipboard", "w");
+    if (pipe) {
+        fwrite(text.c_str(), sizeof(char), text.size(), pipe);
+        pclose(pipe);
+    }
+}
+
 void MainWindow::button_callback() {
     QPushButton* button = qobject_cast<QPushButton*>(QObject::sender());
-    //std::cout << button->text().toStdString() << std::endl;
     clipboard->setText(button->text());
+
+    // On Linux QClipboard does not work on non-Qt based desktops so we need to do a workaround
+    #ifdef __linux__
+    {
+        bool is_qt_based = is_linux_qt_based();
+        if (!is_qt_based) {
+            copy_linux_non_qt(button->text());
+        }
+    }
+    #endif
+
     qApp->quit();
 }
 
