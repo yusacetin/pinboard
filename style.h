@@ -14,16 +14,16 @@ QWidget {
 QPushButton {
     background-color: rgb(42, 42, 42);
     color: rgb(250, 250, 250);
-    font-size: 18pt;
+    font-size: 14pt;
 
     border-radius: 0.2em;
     border: 0.12em solid rgb(60, 60, 60);
 
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
 
-    padding-right: 1em;
-    padding-left: 1em;
+    padding-right: 0.8em;
+    padding-left: 0.8em;
 
     margin: 0.25em;
 }
